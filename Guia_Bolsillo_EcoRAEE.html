@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>EcoRAEE Cloud · Guía y Glosario Total</title>
+  <style>
+    :root {
+      --bg: #0b1120;
+      --card-bg: #1e293b;
+      --card-border: #334155;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --primary: #38bdf8;
+      --primary-dark: #0284c7;
+      --accent: #10b981;
+      --amber: #f59e0b;
+      --rose: #f43f5e;
+      --purple: #c084fc;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    body { background-color: var(--bg); color: var(--text); padding-bottom: 90px; -webkit-tap-highlight-color: transparent; }
+    
+    /* Header */
+    header {
+      background: linear-gradient(135deg, #1e293b 0%, #0b1120 100%);
+      padding: 14px 16px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      border-bottom: 1px solid var(--card-border);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.5);
+    }
+    .badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+    h1 { font-size: 17px; font-weight: 800; color: #fff; margin-bottom: 2px; }
+    .subtitle { font-size: 11px; color: var(--text-muted); }
+
+    /* Search Bar */
+    .search-box { margin-top: 10px; position: relative; }
+    .search-box input {
+      width: 100%;
+      background: #060911;
+      border: 1px solid #334155;
+      padding: 9px 14px 9px 36px;
+      border-radius: 10px;
+      color: #fff;
+      font-size: 13px;
+      outline: none;
+    }
+    .search-box input:focus { border-color: var(--primary); }
+    .search-icon {
+      position: absolute;
+      left: 11px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      background: #0f172a;
+      padding: 4px;
+      gap: 3px;
+      border-bottom: 1px solid var(--card-border);
+      position: sticky;
+      top: 98px;
+      z-index: 40;
+      overflow-x: auto;
+    }
+    .tab-btn {
+      flex: 1;
+      min-width: 80px;
+      text-align: center;
+      padding: 9px 4px;
+      font-size: 11px;
+      font-weight: 700;
+      border-radius: 8px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .tab-btn.active {
+      background: var(--card-bg);
+      color: var(--primary);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    }
+
+    /* Content Area */
+    .content-area { padding: 12px; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* Cards */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 13px;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.25);
+    }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+    .tag {
+      font-size: 11px;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 6px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+    .tag-blue { background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); }
+    .tag-green { background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .tag-purple { background: rgba(192, 132, 252, 0.2); color: #c084fc; border: 1px solid rgba(192, 132, 252, 0.4); }
+    .tag-amber { background: rgba(245, 158, 11, 0.2); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.4); }
+    .tag-rose { background: rgba(244, 63, 94, 0.2); color: #f43f5e; border: 1px solid rgba(244, 63, 94, 0.4); }
+    
+    .card-title { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+    .card-desc { font-size: 13px; color: #cbd5e1; line-height: 1.4; margin-bottom: 8px; }
+
+    /* Flow pills */
+    .flow-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      align-items: center;
+      margin: 8px 0;
+      background: rgba(11, 17, 32, 0.7);
+      padding: 8px;
+      border-radius: 8px;
+      font-size: 11px;
+    }
+    .pill {
+      background: #334155;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      color: #e2e8f0;
+      display: inline-block;
+    }
+    .pill-clickable {
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .pill-clickable:hover { background: var(--primary-dark); color: #fff; }
+    .arrow { color: var(--text-muted); font-weight: bold; }
+
+    /* Speech box */
+    .speech-box {
+      background: rgba(56, 189, 248, 0.08);
+      border-left: 3px solid var(--primary);
+      padding: 10px;
+      border-radius: 0 8px 8px 0;
+      margin-top: 10px;
+    }
+    .speech-label {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 3px;
+    }
+    .speech-text {
+      font-size: 12px;
+      color: #e2e8f0;
+      font-style: italic;
+      line-height: 1.4;
+    }
+
+    /* Selector */
+    .select-label { font-size: 11px; color: var(--text-muted); font-weight: 700; text-transform: uppercase; margin-bottom: 4px; display: block; }
+    .custom-select {
+      width: 100%;
+      background: #060911;
+      border: 1px solid var(--primary);
+      padding: 11px;
+      border-radius: 10px;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      outline: none;
+    }
+
+    /* Code breakdown modal / box */
+    .code-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #0f172a;
+      border: 1px solid var(--card-border);
+      padding: 6px 10px;
+      border-radius: 8px;
+      margin: 3px 0;
+      width: 100%;
+      font-size: 12px;
+    }
+    .code-chip strong { color: var(--primary); font-family: monospace; font-size: 12px; }
+    .code-chip span { color: #cbd5e1; }
+
+    /* Glossary grid */
+    .glossary-cat {
+      margin-top: 14px;
+      margin-bottom: 6px;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--primary);
+      letter-spacing: 0.5px;
+      border-bottom: 1px solid #334155;
+      padding-bottom: 4px;
+    }
+    .glossary-item {
+      background: #1e293b;
+      border-left: 3px solid #475569;
+      padding: 8px 10px;
+      margin-bottom: 6px;
+      border-radius: 0 6px 6px 0;
+      font-size: 12px;
+      line-height: 1.35;
+    }
+    .glossary-item.g-p { border-left-color: var(--rose); }
+    .glossary-item.g-obj { border-left-color: var(--primary); }
+    .glossary-item.g-pa { border-left-color: var(--amber); }
+    .glossary-item.g-rn { border-left-color: #ec4899; }
+    .glossary-item.g-ini { border-left-color: var(--accent); }
+    .glossary-item.g-mod { border-left-color: var(--purple); }
+    .glossary-item.g-tec { border-left-color: #06b6d4; }
+    .glossary-code { font-weight: 800; font-family: monospace; margin-right: 4px; }
+
+    /* Accordion */
+    details {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      margin-bottom: 8px;
+      overflow: hidden;
+    }
+    summary {
+      padding: 11px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: '▼'; font-size: 9px; color: var(--text-muted); transition: transform 0.2s; }
+    details[open] summary::after { transform: rotate(180deg); }
+    .details-body {
+      padding: 11px;
+      border-top: 1px solid var(--card-border);
+      font-size: 12px;
+      line-height: 1.4;
+      color: #cbd5e1;
+      background: rgba(11, 17, 32, 0.5);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <span class="badge">AEI-02 · UIDE Quinto Semestre</span>
+    <h1>EcoRAEE Cloud · Trazabilidad 360°</h1>
+    <div class="subtitle">Explorador de Problemas, Códigos y Glosario Completo</div>
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="Busca cualquier código (P-01, RN-04, INI-05)..." onkeyup="globalSearch()">
+    </div>
+  </header>
+
+  <!-- Navigation Tabs -->
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('tab-explorador')">🎯 Por Problema (P-)</button>
+    <button class="tab-btn" onclick="switchTab('tab-ejes')">📊 6 Ejes TO-BE</button>
+    <button class="tab-btn" onclick="switchTab('tab-glosario')">📚 Glosario Total (77)</button>
+    <button class="tab-btn" onclick="switchTab('tab-preguntas')">❓ Preguntas Profe</button>
+  </div>
+
+  <div class="content-area">
+
+    <!-- TAB 1: EXPLORADOR POR PROBLEMA (LO QUE PIDIÓ EL USUARIO) -->
+    <div id="tab-explorador" class="tab-content active">
+      <div class="card">
+        <label class="select-label">Selecciona el Problema a Defender:</label>
+        <select class="custom-select" id="probSelect" onchange="renderProblemExplorer()">
+          <option value="P-01">P-01: Pérdida de Trazabilidad del Ciclo de Vida</option>
+          <option value="P-02">P-02: Redundancia e Inconsistencia de Datos</option>
+          <option value="P-03">P-03: Control Deficiente de Inventario y Red Logística</option>
+          <option value="P-04">P-04: Alta Sobrecarga Operativa Manual</option>
+          <option value="P-05">P-05: Dificultad para Ubicar Evidencias y Auditar</option>
+          <option value="P-06">P-06: Imposibilidad de Generar KPIs en Tiempo Real</option>
+        </select>
+
+        <div id="probDetail">
+          <!-- Populated by JS with every code explained -->
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: LOS 6 EJES TO-BE (VISIÓN GENERAL) -->
+    <div id="tab-ejes" class="tab-content">
+      <!-- Eje 1 -->
+      <div class="card search-item" data-keywords="eje1 p-01 obj-01 ini-01 ini-02 ini-04 rn-01 rn-08 qr trazabilidad">
+        <div class="card-header">
+          <span class="tag tag-rose">P-01 ➜ OBJ-01</span>
+          <span class="tag tag-blue">B-01, B-02, B-04</span>
+        </div>
+        <div class="card-title">Eje 1: Trazabilidad Extremo a Extremo</div>
+        <div class="card-desc">Evita la pérdida de equipos y rotura de la cadena de custodia desde el ingreso hasta el destino final.</div>
+        <div class="flow-row">
+          <span class="pill">OBJ-01</span> <span class="arrow">→</span>
+          <span class="pill">RN-01 (QR) + RN-08 (Cierre)</span> <span class="arrow">→</span>
+          <span class="pill">MOD-02 / MOD-08</span> <span class="arrow">→</span>
+          <span class="pill">INI-01 + INI-02 + INI-04</span>
+        </div>
+        <div class="speech-box">
+          <div class="speech-label">🎤 Argumento de Alineación</div>
+          <div class="speech-text">"OBJ-01 requiere el proceso BPMN (INI-01) para recibir con QR (RN-01), la base relacional (INI-02) con el historial inmutable OI-05 y el software (INI-04) para auditar el cierre con certificado (RN-08)."</div>
+        </div>
+      </div>
+
+      <!-- Eje 2 -->
+      <div class="card search-item" data-keywords="eje2 p-02 obj-02 ini-02 ini-04 redundancia rds postgresql pa-01 rn-02 rn-06">
+        <div class="card-header">
+          <span class="tag tag-rose">P-02 ➜ OBJ-02</span>
+          <span class="tag tag-blue">B-02, B-04</span>
+        </div>
+        <div class="card-title">Eje 2: Fuente Única de Verdad (Eliminar Redundancia)</div>
+        <div class="card-desc">Elimina discrepancias entre recepción, taller y bodega causadas por múltiples hojas de cálculo locales.</div>
+        <div class="flow-row">
+          <span class="pill">OBJ-02</span> <span class="arrow">→</span>
+          <span class="pill">PA-01 (Dato Único)</span> <span class="arrow">→</span>
+          <span class="pill">TEC-04 (RDS PostgreSQL)</span> <span class="arrow">→</span>
+          <span class="pill">INI-02 (Modelo 3FN) + INI-04</span>
+        </div>
+        <div class="speech-box">
+          <div class="speech-label">🎤 Argumento de Alineación</div>
+          <div class="speech-text">"OBJ-02 elimina la redundancia unificando todo en una base relacional normalizada en Amazon RDS (INI-02), consumida por la SPA web (INI-04), sustituyendo definitivamente los Excels locales."</div>
+        </div>
+      </div>
+
+      <!-- Eje 3 -->
+      <div class="card search-item" data-keywords="eje3 p-03 obj-03 ini-02 ini-05 edmonds-karp rn-05 rn-06 inventario capacidad">
+        <div class="card-header">
+          <span class="tag tag-rose">P-03 ➜ OBJ-03</span>
+          <span class="tag tag-blue">B-02, B-05</span>
+        </div>
+        <div class="card-title">Eje 3: Control de Stock y Capacidad Logística</div>
+        <div class="card-desc">Supera el descontrol de estanterías y previene despachos hacia rutas viales o plantas saturadas.</div>
+        <div class="flow-row">
+          <span class="pill">OBJ-03</span> <span class="arrow">→</span>
+          <span class="pill">RN-06 (Bodega 1:1) + RN-05 (Ruta)</span> <span class="arrow">→</span>
+          <span class="pill">MOD-07 (Edmonds-Karp)</span> <span class="arrow">→</span>
+          <span class="pill">INI-02 (ACID) + INI-05 (Flujo)</span>
+        </div>
+        <div class="speech-box">
+          <div class="speech-label">🎤 Argumento de Alineación</div>
+          <div class="speech-text">"OBJ-03 sincroniza bodega mediante exclusión física 1:1 (INI-02) y aplica el algoritmo de Edmonds-Karp (INI-05 / MOD-07) para validar matemáticamente la capacidad vial antes de cada despacho (RN-05)."</div>
+        </div>
+      </div>
+
+      <!-- Eje 4 -->
+      <div class="card search-item" data-keywords="eje4 p-04 obj-04 ini-01 ini-04 sobrecarga manual portal spa bpmn">
+        <div class="card-header">
+          <span class="tag tag-rose">P-04 ➜ OBJ-04</span>
+          <span class="tag tag-blue">B-01, B-04</span>
+        </div>
+        <div class="card-title">Eje 4: Supresión de la Sobrecarga Manual</div>
+        <div class="card-desc">Elimina el papel y la redigitación manual mediante captura digital inmediata por roles.</div>
+        <div class="flow-row">
+          <span class="pill">OBJ-04</span> <span class="arrow">→</span>
+          <span class="pill">PA-03 (Captura en Origen)</span> <span class="arrow">→</span>
+          <span class="pill">Portal SPA (TEC-01)</span> <span class="arrow">→</span>
+          <span class="pill">INI-01 (BPMN) + INI-04 (SPA)</span>
+        </div>
+        <div class="speech-box">
+          <div class="speech-label">🎤 Argumento de Alineación</div>
+          <div class="speech-text">"OBJ-04 reemplaza las fichas en papel con interfaces web responsivas (INI-04) donde el operador genera la etiqueta QR al instante y el sistema avanza automáticamente la etapa en el flujo BPMN (INI-01)."</div>
+        </div>
+      </div>
+
+      <!-- Eje 5 -->
+      <div class="card search-item" data-keywords="eje5 p-05 obj-05 ini-03 ini-06 evidencias s3 iam auditoria sha-256 rn-03 rn-07">
+        <div class="card-header">
+          <span class="tag tag-rose">P-05 ➜ OBJ-05</span>
+          <span class="tag tag-blue">B-03, B-06</span>
+        </div>
+        <div class="card-title">Eje 5: Resguardo de Evidencias Digitales y Auditoría</div>
+        <div class="card-desc">Impide el extravío de fotos de diagnóstico y actas de entrega en teléfonos personales.</div>
+        <div class="flow-row">
+          <span class="pill">OBJ-05</span> <span class="arrow">→</span>
+          <span class="pill">RN-07 (URLs firmadas)</span> <span class="arrow">→</span>
+          <span class="pill">Amazon S3 Privado (TEC-05)</span> <span class="arrow">→</span>
+          <span class="pill">INI-03 (Evidencias) + INI-06 (AWS)</span>
+        </div>
+        <div class="speech-box">
+          <div class="speech-label">🎤 Argumento de Alineación</div>
+          <div class="speech-text">"OBJ-05 indexa cada foto o acta firmada al código QR con hash SHA-256 (INI-03) y las almacena en un bucket privado de Amazon S3 con URLs temporales y roles IAM de mínimo privilegio (INI-06 / RN-07)."</div>
+        </div>
+      </div>
+
+      <!-- Eje 6 -->
+      <div class="card search-item" data-keywords="eje6 p-06 obj-06 ini-03 ini-04 ini-05 kpi metricas dashboard gobernanza">
+        <div class="card-header">
+          <span class="tag tag-rose">P-06 ➜ OBJ-06</span>
+          <span class="tag tag-blue">B-03, B-04, B-05</span>
+        </div>
+        <div class="card-title">Eje 6: Gobernanza y KPIs en Tiempo Real</div>
+        <div class="card-desc">Supera la falta de información ejecutiva para directivos mediante tableros dinámicos.</div>
+        <div class="flow-row">
+          <span class="pill">OBJ-06</span> <span class="arrow">→</span>
+          <span class="pill">RA-06 (Agregación Automática)</span> <span class="arrow">→</span>
+          <span class="pill">MOD-08 (KPIs)</span> <span class="arrow">→</span>
+          <span class="pill">INI-03 + INI-04 + INI-05</span>
+        </div>
+        <div class="speech-box">
+          <div class="speech-label">🎤 Argumento de Alineación</div>
+          <div class="speech-text">"OBJ-06 entrega un dashboard ejecutivo que agrega en tiempo real las toneladas captadas y tasas de circularidad (INI-03/INI-04) junto con los cuellos de botella calculados por el motor de red (INI-05)."</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: GLOSARIO TOTAL DE TODOS LOS CÓDIGOS (77 EN TOTAL) -->
+    <div id="tab-glosario" class="tab-content">
+      <div style="font-size:12px; color:var(--text-muted); margin-bottom:10px;">
+        💡 Puedes buscar cualquier código arriba en la barra de búsqueda.
+      </div>
+      <div id="glossaryContainer">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+
+    <!-- TAB 4: PREGUNTAS DEL PROFESOR -->
+    <div id="tab-preguntas" class="tab-content">
+      <details open>
+        <summary>¿Por qué OBJ-01 se alinea con INI-02 y no solo con software?</summary>
+        <div class="details-body">
+          <b>Respuesta rápida:</b><br>
+          Porque el software (INI-04) solo muestra pantallas. La <b>trazabilidad real</b> exige persistencia inmutable e integridad referencial en la base de datos (INI-02) a través del objeto <code>OI-05</code> (Historial de Estados) para que nadie pueda borrar o alterar el pasado del residuo.
+        </div>
+      </details>
+
+      <details>
+        <summary>¿Por qué la iniciativa INI-05 (Matemáticas) está en Arquitectura?</summary>
+        <div class="details-body">
+          <b>Respuesta rápida:</b><br>
+          Porque cierra la brecha <code>B-05</code> (despachos a ciegas). Implementa el módulo <code>MOD-07</code> que modela Quito como un grafo con capacidades y corre <b>Edmonds-Karp</b>. Así, la compuerta <code>G2</code> del BPMN valida que no colapsemos las vías ni las plantas receptoras antes de enviar un camión (Regla <code>RN-05</code>).
+        </div>
+      </details>
+
+      <details>
+        <summary>¿Dónde entra la materia de Innovación en la Sociedad?</summary>
+        <div class="details-body">
+          <b>Respuesta rápida:</b><br>
+          En la regla ética <code>RN-04</code> y compuerta <code>G3</code> del BPMN: <b>se prohíbe donar chatarra o equipos no recuperables a beneficiarios vulnerables</b>. Si el técnico dictaminó no recuperable, el sistema bloquea donaciones sociales y solo permite despacho a recicladores ambientales autorizados.
+        </div>
+      </details>
+
+      <details>
+        <summary>¿Por qué la brecha B-06 (Tecnología) es de prioridad ALTA?</summary>
+        <div class="details-body">
+          <b>Respuesta rápida:</b><br>
+          Porque en el AS-IS todo estaba en computadoras de oficina vulnerables y celulares personales sin backup (H-04). <code>INI-06</code> traslada todo a AWS con VPC privada, base RDS aislada y roles IAM de mínimo privilegio (<code>PA-07</code>), garantizando seguridad y continuidad operativa.
+        </div>
+      </details>
+    </div>
+
+  </div>
+
+  <script>
+    // Tab switching
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      event.target.classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Comprehensive Dictionary of All Codes
+    const ALL_CODES = {
+      // Problemas
+      "P-01": { cat: "Problema (AS-IS)", name: "Pérdida de trazabilidad del ciclo de vida", desc: "Se desconoce el estado, custodio y paradero final de los equipos al salir del campus." },
+      "P-02": { cat: "Problema (AS-IS)", name: "Redundancia e inconsistencia de datos", desc: "Datos contradictorios y duplicados en múltiples archivos de Excel y formularios en papel." },
+      "P-03": { cat: "Problema (AS-IS)", name: "Control deficiente de inventario y capacidad", desc: "Descoordinación de existencias en bodega y despachos a ciegas sin conocer la capacidad de las rutas." },
+      "P-04": { cat: "Problema (AS-IS)", name: "Alta sobrecarga operativa manual", desc: "Lentitud por llenado manual de fichas físicas y triple digitación en computadoras." },
+      "P-05": { cat: "Problema (AS-IS)", name: "Dificultad para ubicar evidencias y auditar", desc: "Fotografías técnicas en celulares de operadores y actas archivadas en carpetas físicas." },
+      "P-06": { cat: "Problema (AS-IS)", name: "Imposibilidad de generar KPIs en tiempo real", desc: "Ausencia de indicadores ejecutivos sobre tonelaje captado, desvíos y tasas de reciclaje." },
+
+      // Hallazgos
+      "H-01": { cat: "Hallazgo (AS-IS)", name: "Gestión manual y criterios desarticulados", desc: "Procesos no estandarizados entre recepción, taller y bodega." },
+      "H-02": { cat: "Hallazgo (AS-IS)", name: "Fragmentación y duplicidad de registros", desc: "Información aislada en hojas de cálculo y documentos impresos." },
+      "H-03": { cat: "Hallazgo (AS-IS)", name: "Herramientas ofimáticas aisladas", desc: "Uso desarticulado de Excel, correo institucional y WhatsApp." },
+      "H-04": { cat: "Hallazgo (AS-IS)", name: "Vulnerabilidad de infraestructura local", desc: "Operación en PCs de oficina sin respaldo, celulares personales y red local sin replicación." },
+
+      // Objetivos
+      "OBJ-01": { cat: "Objetivo de Negocio", name: "Garantizar trazabilidad de extremo a extremo", desc: "Monitorear ininterrumpidamente cada activo desde su recepción hasta su disposición final." },
+      "OBJ-02": { cat: "Objetivo de Negocio", name: "Eliminar redundancia e inconsistencia de datos", desc: "Centralizar toda la operación en una única fuente autoritativa de verdad." },
+      "OBJ-03": { cat: "Objetivo de Negocio", name: "Mejorar control de inventario y capacidad de red", desc: "Sincronizar ubicaciones físicas atómicas y transparentar la capacidad de transporte." },
+      "OBJ-04": { cat: "Objetivo de Negocio", name: "Minimizar la carga manual y tiempos de ciclo", desc: "Digitalizar los registros en origen mediante interfaces web por rol." },
+      "OBJ-05": { cat: "Objetivo de Negocio", name: "Centralizar y resguardar evidencias digitales", desc: "Almacenar fotos y actas en repositorio cloud seguro vinculado al QR." },
+      "OBJ-06": { cat: "Objetivo de Negocio", name: "Proveer indicadores ejecutivos en tiempo real", desc: "Habilitar gobernanza basada en datos con tableros ejecutivos automatizados." },
+
+      // Principios
+      "PA-01": { cat: "Principio de Arquitectura", name: "Dato Único y Confiable (Single Source of Truth)", desc: "Una sola entidad autoritativa almacena cada dato sin duplicidades." },
+      "PA-02": { cat: "Principio de Arquitectura", name: "Trazabilidad de Extremo a Extremo", desc: "Cada cambio de estado, custodio o lugar se registra cronológicamente." },
+      "PA-03": { cat: "Principio de Arquitectura", name: "Captura en el Origen", desc: "Los datos se capturan digitalmente en el punto de contacto inicial." },
+      "PA-04": { cat: "Principio de Arquitectura", name: "Evidencia Vinculada", desc: "Ninguna transición técnica o logística es válida sin su archivo de respaldo." },
+      "PA-05": { cat: "Principio de Arquitectura", name: "Integración Guiada por el Proceso", desc: "Los módulos aplicativos colaboran siguiendo el flujo de valor BPMN." },
+      "PA-06": { cat: "Principio de Arquitectura", name: "Continuidad y Protección Tecnológica", desc: "Resiliencia operativa mediante arquitectura cloud, copias y monitoreo." },
+      "PA-07": { cat: "Principio de Arquitectura", name: "Seguridad, Capacidad de Red y Ética Circular", desc: "Mínimo privilegio (IAM/RBAC), respeto a capacidades de ruta y salvaguarda ética de beneficiarios." },
+
+      // Requisitos
+      "RA-01": { cat: "Requisito Arquitectónico", name: "Identificación única e historial inmutable", desc: "Código QR único por equipo y línea de tiempo append-only." },
+      "RA-02": { cat: "Requisito Arquitectónico", name: "Repositorio autoritativo de datos", desc: "Base de datos relacional normalizada con reglas de integridad referencial." },
+      "RA-03": { cat: "Requisito Arquitectónico", name: "Consulta y actualización consistente de inventario", desc: "Control atómico de percha física y disponibilidad." },
+      "RA-04": { cat: "Requisito Arquitectónico", name: "Captura digital en origen por interfaces web", desc: "Formularios web responsivos por rol que evitan el papel." },
+      "RA-05": { cat: "Requisito Arquitectónico", name: "Adjuntar y recuperar evidencia digital vinculada", desc: "Soporte de fotos y actas asociadas a la ficha del equipo." },
+      "RA-06": { cat: "Requisito Arquitectónico", name: "Agregación automática de métricas e indicadores", desc: "Cálculo computarizado de masa recuperada y desvíos." },
+      "RA-07": { cat: "Requisito Arquitectónico", name: "Control de acceso por rol (RBAC) y mínimo privilegio", desc: "Restricción de operaciones y descarga de archivos según rol institucional." },
+
+      // Reglas de Negocio
+      "RN-01": { cat: "Regla de Negocio", name: "Etiquetado QR único al ingreso", desc: "Todo dispositivo que entra genera un QR inmutable e inicia en estado REGISTRADO." },
+      "RN-02": { cat: "Regla de Negocio", name: "Diagnóstico exclusivo por técnico autorizado", desc: "Solo usuarios con rol de técnico pueden emitir la evaluación y clasificación técnica." },
+      "RN-03": { cat: "Regla de Negocio", name: "Cierre de movimiento condicionado a evidencias", desc: "Una transferencia exige origen, destino, responsable y acta firmada." },
+      "RN-04": { cat: "Regla de Negocio", name: "Restricción ética de destino (Innovación Social)", desc: "Prohibido donar residuos clasificados como No Recuperables a escuelas o comunidades vulnerables." },
+      "RN-05": { cat: "Regla de Negocio", name: "Límite de capacidad en rutas (Matemáticas Discretas)", desc: "El flujo transferido no puede superar la capacidad máxima de la arista f(u,v) <= c(u,v)." },
+      "RN-06": { cat: "Regla de Negocio", name: "Exclusión física atómica 1:1 en bodega", desc: "Un dispositivo solo puede encontrarse en una única percha de almacenamiento a la vez." },
+      "RN-07": { cat: "Regla de Negocio", name: "Descarga de evidencias por enlaces temporales firmados", desc: "Acceso a fotos en S3 bloqueado públicamente; solo enlaces firmados por rol." },
+      "RN-08": { cat: "Regla de Negocio", name: "Cierre verificable de trazabilidad", desc: "Solo se cierra el caso cuando existe receptor confirmado, certificado final y fecha." },
+
+      // Capacidades
+      "CAP-01": { cat: "Capacidad (Negocio)", name: "Recepción y Registro de Ingreso de RAEE", desc: "Saber recibir, inspeccionar y registrar lotes en origen." },
+      "CAP-02": { cat: "Capacidad (Negocio)", name: "Evaluación Técnica y Clasificación", desc: "Saber diagnosticar hardware y definir las 4 vías circulares." },
+      "CAP-03": { cat: "Capacidad (Negocio)", name: "Gestión de Inventario y Almacenamiento", desc: "Saber controlar perchas, pasillos y órdenes de taller." },
+      "CAP-04": { cat: "Capacidad (Negocio)", name: "Gestión de Evidencias Digitales", desc: "Saber capturar, catalogar y custodiar fotografías y actas." },
+      "CAP-05": { cat: "Capacidad (Negocio)", name: "Gestión de Logística y Transferencias", desc: "Saber coordinar traslados terrestres y manifiestos de carga." },
+      "CAP-06": { cat: "Capacidad (Negocio)", name: "Monitoreo, Control y Analítica Ejecutiva", desc: "Saber supervisar la operación mediante tableros e indicadores." },
+      "CAP-07": { cat: "Capacidad (Negocio)", name: "Disposición Final y Cierre de Caso", desc: "Saber formalizar la entrega a beneficiarios o gestores ambientales." },
+      "CAP-08": { cat: "Capacidad (Negocio)", name: "Coordinación con Generadores y Beneficiarios", desc: "Saber vincular a la comunidad donante y a las fundaciones receptoras." },
+      "CAP-09": { cat: "Capacidad (Negocio - NUEVA)", name: "Análisis de Capacidad y Flujo de Red", desc: "Saber modelar la red como grafo y calcular flujo máximo (Edmonds-Karp)." },
+      "CAP-10": { cat: "Capacidad (Negocio - NUEVA)", name: "Gestión de Identidad, Acceso y Auditoría", desc: "Saber gobernar credenciales, roles institucionales y pistas de auditoría." },
+
+      // Procesos
+      "PRC-01": { cat: "Proceso BPMN", name: "Gobernanza y Supervisión", desc: "Control estratégico y normativo de la plataforma." },
+      "PRC-02": { cat: "Proceso BPMN", name: "Recepción y Registro de Ingreso", desc: "Desde la solicitud del donante hasta la asignación de la etiqueta QR." },
+      "PRC-03": { cat: "Proceso BPMN", name: "Evaluación Técnica y Clasificación", desc: "Diagnóstico en laboratorio y decisión de taller o reciclaje." },
+      "PRC-04": { cat: "Proceso BPMN", name: "Almacenamiento y Control de Stock", desc: "Ingreso atómico a perchas de bodega y gestión de repuestos." },
+      "PRC-05": { cat: "Proceso BPMN", name: "Gestión de Documentación y Evidencias", desc: "Carga y custodia de fotografías técnicas y actas." },
+      "PRC-06": { cat: "Proceso BPMN", name: "Distribución, Transferencia y Cierre", desc: "Planificación de rutas, control de saturación y despacho formal." },
+      "PRC-07": { cat: "Proceso BPMN", name: "Consolidación de Métricas KPI", desc: "Agregación periódica de indicadores de economía circular." },
+
+      // Objetos de Información
+      "OI-01": { cat: "Objeto de Información", name: "Actor y Perfil de Acceso", desc: "Identidad institucional y rol asignado (RBAC)." },
+      "OI-02": { cat: "Objeto de Información", name: "Solicitud y Lote de Entrega", desc: "Registro de origen, donante, fecha y peso declarado." },
+      "OI-03": { cat: "Objeto de Información", name: "Dispositivo RAEE (Ficha Maestra QR)", desc: "Código QR único, marca, modelo, categoría y estado actual." },
+      "OI-04": { cat: "Objeto de Información", name: "Evaluación Técnica y Clasificación", desc: "Dictamen de funcionalidad en las 4 vías circulares." },
+      "OI-05": { cat: "Objeto de Información", name: "Historial Inmutable de Estados", desc: "Línea de tiempo append-only en BD con fecha, autor y motivo." },
+      "OI-06": { cat: "Objeto de Información", name: "Inventario y Ubicación en Bodega", desc: "Percha, pasillo y contenedor activo bajo exclusión 1:1." },
+      "OI-07": { cat: "Objeto de Información", name: "Evidencia Digital y Documental", desc: "URI en Amazon S3, hash SHA-256 y tipo MIME." },
+      "OI-08": { cat: "Objeto de Información", name: "Movimiento y Manifiesto de Transferencia", desc: "Ruta origen-destino, chofer, pesos y estado en tránsito." },
+      "OI-09": { cat: "Objeto de Información", name: "Red Logística y Resultado de Flujo", desc: "Grafo G=(V,E), capacidades c(u,v) y corte mínimo." },
+      "OI-10": { cat: "Objeto de Información", name: "Destino Final e Indicadores Ejecutivos (KPIs)", desc: "Certificado de cierre, toneladas acumuladas y métricas." },
+
+      // Módulos de Aplicación
+      "MOD-01": { cat: "Módulo de Aplicación", name: "Seguridad, Identidad y Control RBAC", desc: "Valida credenciales JWT y permisos por rol en cada endpoint." },
+      "MOD-02": { cat: "Módulo de Aplicación", name: "Recepción, Lotes y Registro QR", desc: "Genera la ficha maestra y el código QR de identificación." },
+      "MOD-03": { cat: "Módulo de Aplicación", name: "Evaluación Técnica y Clasificación", desc: "Registra el diagnóstico en 4 vías y órdenes de taller." },
+      "MOD-04": { cat: "Módulo de Aplicación", name: "Gestión de Inventario y Bodega", desc: "Controla stock atómico y perchas físicas en almacén." },
+      "MOD-05": { cat: "Módulo de Aplicación", name: "Transferencias Logísticas y Destino Final", desc: "Emite manifiestos de transporte y valida la regla ética RN-04." },
+      "MOD-06": { cat: "Módulo de Aplicación", name: "Servicio de Gestión de Evidencias Digitales", desc: "Sube y descarga fotos en S3 con URLs prefirmadas." },
+      "MOD-07": { cat: "Módulo de Aplicación", name: "Motor de Capacidad y Flujo de Red", desc: "Ejecuta el algoritmo Edmonds-Karp para detectar cuellos de botella." },
+      "MOD-08": { cat: "Módulo de Aplicación", name: "Trazabilidad, Auditoría y Reportes KPI", desc: "Expone la línea de tiempo por QR y los tableros ejecutivos." },
+
+      // Componentes Tecnológicos Cloud AWS
+      "TEC-01": { cat: "Tecnología Cloud AWS", name: "Alojamiento Frontend Web (Amazon S3 SPA)", desc: "Entrega estática de la interfaz web responsiva por roles." },
+      "TEC-02": { cat: "Tecnología Cloud AWS", name: "Red Virtual Aislada (Amazon VPC)", desc: "Segmenta subredes públicas (ALB) y privadas (EC2/RDS)." },
+      "TEC-03": { cat: "Tecnología Cloud AWS", name: "Balanceo y Backend (ALB + Amazon EC2)", desc: "Ejecuta la API REST y las validaciones de negocio." },
+      "TEC-04": { cat: "Tecnología Cloud AWS", name: "Base de Datos Transaccional (Amazon RDS)", desc: "PostgreSQL en subred privada con respaldos automáticos." },
+      "TEC-05": { cat: "Tecnología Cloud AWS", name: "Almacenamiento de Evidencias (Amazon S3)", desc: "Bucket privado con cifrado SSE-S3 y URLs temporales." },
+      "TEC-06": { cat: "Tecnología Cloud AWS", name: "Gobierno de Accesos (AWS IAM + Roles)", desc: "Políticas de mínimo privilegio sin credenciales quemadas." },
+      "TEC-07": { cat: "Tecnología Cloud AWS", name: "Observabilidad (CloudWatch + CloudTrail)", desc: "Logs centralizados, alarmas y auditoría de infraestructura." },
+
+      // Brechas
+      "B-01": { cat: "Brecha (Gap)", name: "Carencia de procedimientos operativos estandarizados", desc: "Pasos manuales desordenados y sin control de rol (Dominio Negocio)." },
+      "B-02": { cat: "Brecha (Gap)", name: "Inexistencia de repositorio centralizado y normalizado", desc: "Duplicidad en Excels y falta de sincronización de stock (Dominio Información)." },
+      "B-03": { cat: "Brecha (Gap)", name: "Falta de indexación de evidencias y métricas analíticas", desc: "Fotos sueltas en chats y reportes armados a mano (Dominio Información)." },
+      "B-04": { cat: "Brecha (Gap)", name: "Ausencia de módulos aplicativos integrados", desc: "Falta de portal web por rol que automatice el ciclo (Dominio Aplicaciones)." },
+      "B-05": { cat: "Brecha (Gap)", name: "Inexistencia de cálculo algorítmico de red logística", desc: "Despachos a ciegas sin verificar capacidad vial (Dominio Negocio/Apps)." },
+      "B-06": { cat: "Brecha (Gap)", name: "Falta de infraestructura cloud segura y resiliente", desc: "Vulnerabilidad por operar en PCs locales sin backup (Dominio Tecnología)." },
+
+      // Iniciativas
+      "INI-01": { cat: "Iniciativa de Transformación", name: "Estandarización y Formalización BPMN 2.0", desc: "Rediseñar procedimientos operativos con compuertas de control ético y técnico (cierra B-01)." },
+      "INI-02": { cat: "Iniciativa de Transformación", name: "Unificación del Modelo de Datos Transaccional", desc: "Consolidar base relacional en 3FN con transacciones atómicas e historial inmutable (cierra B-02)." },
+      "INI-03": { cat: "Iniciativa de Transformación", name: "Digitalización de Evidencias y Automatización de KPIs", desc: "Protocolo de carga fotográfica con SHA-256 y cálculo automático de métricas (cierra B-03)." },
+      "INI-04": { cat: "Iniciativa de Transformación", name: "Desarrollo Modular de Plataforma EcoRAEE Cloud", desc: "Construir el portal web SPA y los módulos lógicos integrados (cierra B-04)." },
+      "INI-05": { cat: "Iniciativa de Transformación", name: "Modelo Matemático de Capacidad y Flujo en Red", desc: "Integrar el grafo dirigido y algoritmo de Edmonds-Karp para validar transferencias (cierra B-05)." },
+      "INI-06": { cat: "Iniciativa de Transformación", name: "Despliegue de Infraestructura Cloud en AWS", desc: "Habilitar VPC privada, RDS aislado, S3 seguro, IAM de mínimo privilegio y CloudWatch (cierra B-06)." }
+    };
+
+    // Mapping from Problems to Everything else (Tabla 11 complete)
+    const PROBLEMS_DETAIL = {
+      "P-01": {
+        nombre: "Pérdida de trazabilidad del ciclo de vida del dispositivo",
+        hallazgos: ["H-01 (Procesos manuales desarticulados)", "H-03 (Herramientas ofimáticas aisladas)"],
+        objetivo: "OBJ-01: Garantizar la trazabilidad de extremo a extremo de los dispositivos en todas las etapas.",
+        principios: ["PA-02 (Trazabilidad de Extremo a Extremo)", "PA-07 (Seguridad y Ética Circular)"],
+        requisitos: ["RA-01 (Identificación única e historial inmutable)", "RA-07 (Control de acceso por rol RBAC)"],
+        reglas: ["RN-01 (Asignar código QR único al ingresar)", "RN-08 (Cierre condicionado a certificado final)"],
+        capacidades: ["CAP-01 (Recepción)", "CAP-05 (Logística)", "CAP-07 (Disposición Final)", "CAP-10 (Identidad y Auditoría)"],
+        procesos: ["PRC-02 (Recepción y Registro)", "PRC-06 (Transferencia y Cierre)"],
+        info: ["OI-03 (Ficha Dispositivo QR)", "OI-05 (Historial Inmutable de Estados)", "OI-10 (Destino Final)"],
+        modulos: ["MOD-01 (RBAC)", "MOD-02 (Registro QR)", "MOD-05 (Transferencias)", "MOD-08 (Trazabilidad y KPIs)"],
+        cloud: ["TEC-03 (API REST Backend en EC2)", "TEC-04 (Amazon RDS en Subred Privada)"],
+        brechas: ["B-01 (Carencia de procedimientos)", "B-02 (Datos dispersos)", "B-04 (Falta de software integrado)"],
+        iniciativas: ["INI-01 (Proceso BPMN 2.0)", "INI-02 (Modelo de Datos Relacional)", "INI-04 (Plataforma EcoRAEE Cloud)"],
+        porQue: "No es posible lograr trazabilidad con solo programar pantallas (INI-04). Es indispensable un proceso BPMN formal de recepción con QR (INI-01) y una base relacional normalizada (INI-02) con el objeto de historial inmutable OI-05, para que ninguna etapa quede sin registrar y se cumpla RN-01 y RN-08."
+      },
+      "P-02": {
+        nombre: "Redundancia e inconsistencia de datos entre áreas",
+        hallazgos: ["H-02 (Datos fragmentados y duplicados en Excel y papel)", "H-03 (Herramientas ofimáticas aisladas)"],
+        objetivo: "OBJ-02: Eliminar la redundancia e inconsistencia de datos entre registros.",
+        principios: ["PA-01 (Dato Único y Confiable - Single Source of Truth)", "PA-05 (Integración Guiada por el Proceso)"],
+        requisitos: ["RA-02 (Repositorio autoritativo normalizado con integridad referencial)"],
+        reglas: ["RN-02 (Diagnóstico exclusivo por técnico autorizado)", "RN-06 (Actualizaciones transaccionales ACID de stock)"],
+        capacidades: ["CAP-01 (Recepción)", "CAP-02 (Evaluación Técnica)", "CAP-03 (Inventario y Bodega)"],
+        procesos: ["PRC-02 (Recepción)", "PRC-03 (Evaluación)", "PRC-04 (Almacenamiento)"],
+        info: ["OI-02 (Lote)", "OI-03 (Dispositivo QR)", "OI-04 (Evaluación Técnica)", "OI-06 (Inventario en Bodega)"],
+        modulos: ["MOD-02 (Recepción)", "MOD-03 (Taller y Evaluación)", "MOD-04 (Inventario y Bodega)"],
+        cloud: ["TEC-04 (Amazon RDS PostgreSQL en Subred Privada)"],
+        brechas: ["B-02 (Inexistencia de base centralizada)", "B-04 (Sistemas aislados sin conexión)"],
+        iniciativas: ["INI-02 (Unificación del Modelo de Datos 3FN)", "INI-04 (Desarrollo Plataforma EcoRAEE Cloud)"],
+        porQue: "Erradica de raíz las hojas de cálculo locales duplicadas sustituyéndolas por una única fuente de verdad autoritativa en Amazon RDS (INI-02). Los módulos de recepción, taller y bodega interactúan sobre el mismo modelo relacional (INI-04), garantizando que todos lean y escriban los mismos datos."
+      },
+      "P-03": {
+        nombre: "Control deficiente de inventario y capacidad de red",
+        hallazgos: ["H-02 (Discrepancias recurrentes entre físico y digital)"],
+        objetivo: "OBJ-03: Mejorar el control, la visibilidad y la exactitud del inventario y de las capacidades de transferencia.",
+        principios: ["PA-01 (Dato Confiable)", "PA-05 (Procesos Integrados)", "PA-07 (Capacidad Verificada)"],
+        requisitos: ["RA-03 (Consulta y actualización consistente de stock y ubicación)"],
+        reglas: ["RN-05 (Límite de capacidad en rutas f(u,v) <= c(u,v))", "RN-06 (Exclusión física 1:1 en bodega)"],
+        capacidades: ["CAP-03 (Inventario)", "CAP-05 (Logística)", "CAP-09 (Análisis de Capacidad y Flujo de Red)"],
+        procesos: ["PRC-04 (Almacenamiento y Stock)", "PRC-06 (Distribución y Transferencias)"],
+        info: ["OI-06 (Inventario Atómico)", "OI-08 (Manifiesto de Movimiento)", "OI-09 (Red Logística y Corte Mínimo)"],
+        modulos: ["MOD-04 (Gestión de Bodega)", "MOD-05 (Transferencias)", "MOD-07 (Motor Edmonds-Karp)"],
+        cloud: ["TEC-03 (Cómputo Backend API)", "TEC-04 (Amazon RDS)"],
+        brechas: ["B-02 (Desincronización de bodega)", "B-05 (Falta de cálculo de capacidad logística)"],
+        iniciativas: ["INI-02 (Transacciones ACID en BD)", "INI-05 (Modelo Matemático de Flujo de Red)"],
+        porQue: "Resuelve dos problemas logísticos: la desincronización de bodega mediante control atómico 1:1 en estanterías (INI-02 / RN-06) y la coordinación a ciegas de camiones mediante el algoritmo de Edmonds-Karp (INI-05 / MOD-07), que valida matemáticamente la capacidad de ruta antes de cada despacho (RN-05)."
+      },
+      "P-04": {
+        nombre: "Alta sobrecarga operativa manual y lentitud",
+        hallazgos: ["H-01 (Dependencia de tareas manuales)", "H-03 (Herramientas ofimáticas aisladas)"],
+        objetivo: "OBJ-04: Minimizar la carga administrativa manual y los tiempos de ciclo en ingreso y triaje.",
+        principios: ["PA-03 (Captura en el Origen)", "PA-05 (Integración Guiada por el Proceso)"],
+        requisitos: ["RA-04 (Captura digital en origen mediante interfaces web por rol)"],
+        reglas: ["RN-01 (QR inmediato en origen)", "RN-02 (Diagnóstico técnico guiado)"],
+        capacidades: ["CAP-01 (Recepción)", "CAP-02 (Evaluación Técnica)", "CAP-08 (Coordinación con Donantes)"],
+        procesos: ["PRC-02 (Recepción y Registro)", "PRC-03 (Evaluación Técnica)"],
+        info: ["OI-02 (Solicitud y Lote)", "OI-03 (Dispositivo QR)", "OI-04 (Evaluación Técnica)"],
+        modulos: ["Portal Web SPA", "MOD-02 (Recepción y Lotes)", "MOD-03 (Evaluación Técnica)"],
+        cloud: ["TEC-01 (Amazon S3 Static Hosting)", "TEC-03 (Backend en EC2)"],
+        brechas: ["B-01 (Carencia de procedimientos)", "B-04 (Ausencia de portal web)"],
+        iniciativas: ["INI-01 (Estandarización BPMN 2.0)", "INI-04 (Desarrollo Portal Web SPA)"],
+        porQue: "Suprime los formularios físicos en papel permitiendo que el operador registre el lote y genere la etiqueta QR en segundos desde el portal web responsivo (INI-04). Al mismo tiempo, el proceso BPMN (INI-01) encamina la orden automáticamente hacia la bandeja del técnico evaluador."
+      },
+      "P-05": {
+        nombre: "Dificultad para ubicar evidencias diagnósticas y auditar",
+        hallazgos: ["H-04 (Operación descansa en celulares y almacenamiento local sin replicación)"],
+        objetivo: "OBJ-05: Centralizar y agilizar el resguardo seguro y la recuperación de evidencias y actas.",
+        principios: ["PA-04 (Evidencia Vinculada)", "PA-06 (Protección Tecnológica)", "PA-07 (Mínimo Privilegio)"],
+        requisitos: ["RA-05 (Adjuntar y recuperar evidencia digital)", "RA-07 (Control de acceso por rol)"],
+        reglas: ["RN-03 (Evidencia obligatoria en transferencias)", "RN-07 (URLs firmadas temporales)"],
+        capacidades: ["CAP-04 (Gestión de Evidencias Digitales)", "CAP-07 (Cierre de Caso)", "CAP-10 (Gobierno IAM)"],
+        procesos: ["PRC-05 (Gestión de Evidencias)", "PRC-06 (Distribución y Cierre)"],
+        info: ["OI-01 (Actor y Perfil)", "OI-07 (Evidencia Digital con Hash SHA-256)"],
+        modulos: ["MOD-01 (Seguridad RBAC)", "MOD-06 (Servicio de Evidencias S3)"],
+        cloud: ["TEC-05 (Amazon S3 Bucket Privado)", "TEC-06 (AWS IAM Roles)", "TEC-07 (CloudWatch / CloudTrail)"],
+        brechas: ["B-03 (Falta de indexación de evidencias)", "B-06 (Infraestructura local vulnerable)"],
+        iniciativas: ["INI-03 (Protocolo de Evidencias Digitales)", "INI-06 (Infraestructura Cloud AWS)"],
+        porQue: "Impide que las fotografías y actas se queden en los celulares personales de los operadores. Establece la obligación de indexar el archivo con hash SHA-256 al código QR del dispositivo (INI-03) y lo custodia en un bucket privado de Amazon S3 con permisos IAM y enlaces prefirmados temporales (INI-06 / RN-07)."
+      },
+      "P-06": {
+        nombre: "Imposibilidad de generar KPIs en tiempo real",
+        hallazgos: ["H-03 (Ausencia de visibilidad ejecutiva e indicadores de desempeño)"],
+        objetivo: "OBJ-06: Proveer indicadores ejecutivos confiables en tiempo real para habilitar gobernanza.",
+        principios: ["PA-01 (Dato Único)", "PA-05 (Integración Guiada por el Proceso)"],
+        requisitos: ["RA-06 (Agregación automática de métricas de desempeño e indicadores)"],
+        reglas: ["RN-04 (Restricción ética)", "RN-08 (Cálculo solo sobre ciclos cerrados)"],
+        capacidades: ["CAP-06 (Monitoreo y Analítica)", "CAP-09 (Análisis de Capacidad de Red)"],
+        procesos: ["PRC-01 (Gobernanza)", "PRC-07 (Consolidación de Métricas KPI)"],
+        info: ["OI-05 (Historial)", "OI-09 (Resultado Flujo)", "OI-10 (Destino Final e Indicadores)"],
+        modulos: ["MOD-07 (Motor Edmonds-Karp)", "MOD-08 (Trazabilidad, Auditoría y KPIs)"],
+        cloud: ["TEC-03 (API Backend)", "TEC-04 (Amazon RDS)", "TEC-07 (Amazon CloudWatch)"],
+        brechas: ["B-03 (Falta de datos analíticos)", "B-04 (Falta de tableros)", "B-05 (Sin análisis de red)"],
+        iniciativas: ["INI-03 (Automatización de KPIs)", "INI-04 (Plataforma Web)", "INI-05 (Métricas de Red)"],
+        porQue: "Los directivos ya no tienen que esperar días a que se consoliden reportes manuales. La plataforma computariza en tiempo real el tonelaje captado y las tasas de circularidad (INI-03/INI-04) junto con los cuellos de botella calculados por el motor de red logística (INI-05)."
+      }
+    };
+
+    function renderProblemExplorer() {
+      const code = document.getElementById('probSelect').value;
+      const data = PROBLEMS_DETAIL[code];
+      const container = document.getElementById('probDetail');
+
+      container.innerHTML = `
+        <div style="background:#0f172a; padding:12px; border-radius:10px; border:1px solid #334155; margin-bottom:12px;">
+          <div style="font-size:15px; font-weight:800; color:#f43f5e; margin-bottom:4px;">${code}: ${data.nombre}</div>
+          <div style="font-size:12px; color:#94a3b8; margin-bottom:6px;"><b>Hallazgos AS-IS:</b> ${data.hallazgos.join(', ')}</div>
+          <div style="font-size:13px; color:#38bdf8; font-weight:700;">🎯 Resuelto por ${data.objetivo}</div>
+        </div>
+
+        <div class="speech-box" style="margin-bottom:12px;">
+          <div class="speech-label">🎤 ¿Por qué se alinean? (Para responderle al profesor)</div>
+          <div class="speech-text">"${data.porQue}"</div>
+        </div>
+
+        <div style="font-size:12px; font-weight:800; color:#fff; text-transform:uppercase; margin-bottom:6px; letter-spacing:0.5px;">
+          Todos los elementos vinculados a ${code}:
+        </div>
+
+        <div class="code-chip">
+          <strong>Principios (PA):</strong> <span>${renderPills(data.principios)}</span>
+        </div>
+        <div class="code-chip">
+          <strong>Requisitos (RA):</strong> <span>${renderPills(data.requisitos)}</span>
+        </div>
+        <div class="code-chip">
+          <strong>Reglas de Negocio (RN):</strong> <span>${renderPills(data.reglas)}</span>
+        </div>
+        <div class="code-chip">
+          <strong>Capacidades (CAP):</strong> <span>${renderPills(data.capacidades)}</span>
+        </div>
+        <div class="code-chip">
+          <strong>Procesos (PRC):</strong> <span>${renderPills(data.procesos)}</span>
+        </div>
+        <div class="code-chip">
+          <strong>Objetos de Información (OI):</strong> <span>${renderPills(data.info)}</span>
+        </div>
+        <div class="code-chip">
+          <strong>Módulos de Aplicación (MOD):</strong> <span>${renderPills(data.modulos)}</span>
+        </div>
+        <div class="code-chip">
+          <strong>Tecnología Cloud AWS (TEC):</strong> <span>${renderPills(data.cloud)}</span>
+        </div>
+        <div class="code-chip" style="background:rgba(244, 63, 94, 0.08); border-color:#f43f5e;">
+          <strong style="color:#f43f5e;">Brechas Cerradas (B):</strong> <span>${renderPills(data.brechas)}</span>
+        </div>
+        <div class="code-chip" style="background:rgba(16, 185, 129, 0.08); border-color:#10b981;">
+          <strong style="color:#10b981;">Iniciativas / Propuestas (INI):</strong> <span>${renderPills(data.iniciativas)}</span>
+        </div>
+      `;
+    }
+
+    function renderPills(items) {
+      return items.map(it => {
+        const parts = it.split(' ');
+        const codeOnly = parts[0];
+        return `<span class="pill pill-clickable" onclick="showCodeInfo('${codeOnly}')" title="Toca para ver qué significa">${it}</span>`;
+      }).join(' ');
+    }
+
+    function showCodeInfo(code) {
+      const cleanCode = code.replace(/[(),]/g, '');
+      const item = ALL_CODES[cleanCode];
+      if (item) {
+        alert(`【${cleanCode}】 ${item.name}\n\nCategoría: ${item.cat}\n\nSignificado: ${item.desc}`);
+      }
+    }
+
+    // Render Full Glossary in Tab 3
+    function renderGlossary() {
+      const cont = document.getElementById('glossaryContainer');
+      const categories = [
+        { cat: "Problema (AS-IS)", prefix: "g-p", title: "Problemas del Negocio (P-01 a P-06)" },
+        { cat: "Hallazgo (AS-IS)", prefix: "g-p", title: "Hallazgos Priorizados (H-01 a H-04)" },
+        { cat: "Objetivo de Negocio", prefix: "g-obj", title: "Objetivos de Negocio (OBJ-01 a OBJ-06)" },
+        { cat: "Principio de Arquitectura", prefix: "g-pa", title: "Principios de Arquitectura (PA-01 a PA-07)" },
+        { cat: "Requisito Arquitectónico", prefix: "g-pa", title: "Requisitos de Arquitectura (RA-01 a RA-07)" },
+        { cat: "Regla de Negocio", prefix: "g-rn", title: "Reglas de Negocio Críticas (RN-01 a RN-08)" },
+        { cat: "Iniciativa de Transformación", prefix: "g-ini", title: "Iniciativas de Transformación (INI-01 a INI-06)" },
+        { cat: "Brecha (Gap)", prefix: "g-p", title: "Brechas Estructurales (B-01 a B-06)" },
+        { cat: "Capacidad (Negocio)", prefix: "g-mod", title: "Capacidades de Negocio (CAP-01 a CAP-10)" },
+        { cat: "Proceso BPMN", prefix: "g-mod", title: "Procesos de Negocio BPMN (PRC-01 a PRC-07)" },
+        { cat: "Objeto de Información", prefix: "g-mod", title: "Objetos de Información (OI-01 a OI-10)" },
+        { cat: "Módulo de Aplicación", prefix: "g-mod", title: "Módulos de Aplicación (MOD-01 a MOD-08)" },
+        { cat: "Tecnología Cloud AWS", prefix: "g-tec", title: "Componentes Cloud AWS (TEC-01 a TEC-07)" }
+      ];
+
+      let html = '';
+      categories.forEach(c => {
+        html += `<div class="glossary-cat">${c.title}</div>`;
+        for (const [code, info] of Object.entries(ALL_CODES)) {
+          if (info.cat.startsWith(c.cat) || info.cat === c.cat) {
+            html += `
+              <div class="glossary-item ${c.prefix} search-gloss" data-code="${code}" data-text="${info.name} ${info.desc}">
+                <span class="glossary-code" style="color:var(--primary);">${code}:</span>
+                <span style="font-weight:700; color:#fff;">${info.name}</span>
+                <div style="font-size:11px; color:#cbd5e1; margin-top:2px;">${info.desc}</div>
+              </div>
+            `;
+          }
+        }
+      });
+      cont.innerHTML = html;
+    }
+
+    // Global Search across tabs
+    function globalSearch() {
+      const q = document.getElementById('searchInput').value.toLowerCase().trim();
+      
+      // Search in Tab 2 (Ejes)
+      document.querySelectorAll('.search-item').forEach(card => {
+        const text = (card.innerText + ' ' + card.getAttribute('data-keywords')).toLowerCase();
+        card.style.display = text.includes(q) ? 'block' : 'none';
+      });
+
+      // Search in Tab 3 (Glossary)
+      document.querySelectorAll('.search-gloss').forEach(item => {
+        const text = (item.getAttribute('data-code') + ' ' + item.getAttribute('data-text')).toLowerCase();
+        item.style.display = text.includes(q) ? 'block' : 'none';
+      });
+
+      // If user typed a Problem code (P-01 to P-06), auto-switch the explorer select!
+      const match = q.match(/p-0?[1-6]/i);
+      if (match) {
+        const pCode = match[0].toUpperCase().replace("P-0", "P-0");
+        const formatted = pCode.length === 3 ? pCode.replace("P-", "P-0") : pCode;
+        const sel = document.getElementById('probSelect');
+        if (sel && sel.value !== formatted) {
+          sel.value = formatted;
+          renderProblemExplorer();
+        }
+      }
+    }
+
+    // Initialize
+    renderProblemExplorer();
+    renderGlossary();
+  </script>
+</body>
+</html>

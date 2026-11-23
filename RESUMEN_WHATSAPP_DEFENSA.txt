@@ -1,0 +1,134 @@
+📱 GUÍA TOTAL DE DEFENSA - ARQUITECTURA EMPRESARIAL (AEI-02)
+Proyecto: EcoRAEE Cloud | UIDE 5to Semestre | Ing. Iván Reyes Chacón
+
+============================================================
+🔹 1. FÓRMULA DE TRAZABILIDAD (CÓMO CONECTAR CUALQUIER CÓDIGO)
+============================================================
+Problema (P) ➡️ Objetivo (OBJ) ➡️ Principio/Regla (PA/RN) ➡️ Capacidad/Proceso/Datos/App/Cloud ➡️ Brecha (B) ➡️ Iniciativa (INI)
+
+============================================================
+🔹 2. DESGLOSE DETALLADO POR PROBLEMA (P-01 A P-06)
+============================================================
+
+🔴 P-01: Pérdida de trazabilidad del ciclo de vida del dispositivo
+• Hallazgos AS-IS: H-01 (procesos manuales) y H-03 (ofimática aislada).
+• Objetivo que lo resuelve: OBJ-01 (Trazabilidad extremo a extremo).
+• Principios: PA-02 (Trazabilidad ininterrumpida) y PA-07 (Seguridad y Ética).
+• Requisitos: RA-01 (ID único e historial) y RA-07 (Control RBAC).
+• Reglas de Negocio: RN-01 (QR único al ingreso) y RN-08 (Cierre con certificado).
+• Capacidades TO-BE: CAP-01 (Recepción), CAP-05 (Logística), CAP-07 (Disposición) y CAP-10 (Auditoría).
+• Procesos BPMN: PRC-02 (Recepción) y PRC-06 (Transferencias y Cierre).
+• Objetos de Información: OI-03 (Ficha Dispositivo QR), OI-05 (Historial Inmutable) y OI-10 (Destino Final).
+• Módulos de Software: MOD-01 (Seguridad), MOD-02 (Registro QR), MOD-05 (Transferencias) y MOD-08 (Trazabilidad y KPIs).
+• Componentes Cloud AWS: TEC-03 (Backend en EC2) y TEC-04 (Amazon RDS).
+• Brechas cerradas: B-01 (Negocio), B-02 (Información) y B-04 (Aplicaciones).
+• Iniciativas que lo ejecutan: INI-01 (BPMN), INI-02 (Modelo Relacional) e INI-04 (Plataforma Web).
+👉 ¿POR QUÉ SE ALINEAN?:
+"No basta con programar botones (INI-04). Es obligatorio tener el flujo BPMN de recepción (INI-01) y la base de datos relacional (INI-02) con el objeto de historial inmutable OI-05, para que ninguna etapa quede sin registrar y se cumpla RN-01 y RN-08."
+
+------------------------------------------------------------
+🔴 P-02: Redundancia e inconsistencia de datos entre áreas
+• Hallazgos AS-IS: H-02 (datos duplicados en Excel y papel) y H-03 (sistemas aislados).
+• Objetivo que lo resuelve: OBJ-02 (Eliminar redundancia de datos / Dato único).
+• Principios: PA-01 (Single Source of Truth) y PA-05 (Integración guiada por procesos).
+• Requisitos: RA-02 (Repositorio autoritativo 3FN con integridad referencial).
+• Reglas de Negocio: RN-02 (Diagnóstico exclusivo por técnico) y RN-06 (Stock atómico).
+• Capacidades TO-BE: CAP-01 (Recepción), CAP-02 (Evaluación) y CAP-03 (Bodega).
+• Procesos BPMN: PRC-02 (Recepción), PRC-03 (Evaluación) y PRC-04 (Almacenamiento).
+• Objetos de Información: OI-02 (Lote), OI-03 (Dispositivo QR), OI-04 (Evaluación) y OI-06 (Inventario).
+• Módulos de Software: MOD-02 (Recepción), MOD-03 (Taller) y MOD-04 (Bodega).
+• Componentes Cloud AWS: TEC-04 (Amazon RDS en Subred Privada).
+• Brechas cerradas: B-02 (Información) y B-04 (Aplicaciones).
+• Iniciativas que lo ejecutan: INI-02 (Modelo de Datos 3FN) e INI-04 (Desarrollo EcoRAEE).
+👉 ¿POR QUÉ SE ALINEAN?:
+"Erradica de raíz las hojas de Excel aisladas centralizando todo en Amazon RDS (INI-02). Los módulos de recepción, taller y bodega operan sobre la misma base normalizada (INI-04), garantizando que todos lean y escriban los mismos datos."
+
+------------------------------------------------------------
+🔴 P-03: Control deficiente de inventario y capacidad de red
+• Hallazgos AS-IS: H-02 (discrepancias entre stock físico y digital).
+• Objetivo que lo resuelve: OBJ-03 (Control de inventario y capacidad logística).
+• Principios: PA-01 (Dato Confiable), PA-05 (Procesos) y PA-07 (Capacidad Verificada).
+• Requisitos: RA-03 (Actualización consistente de stock y percha).
+• Reglas de Negocio: RN-05 (Límite de capacidad f(u,v) <= c(u,v)) y RN-06 (Exclusión 1:1).
+• Capacidades TO-BE: CAP-03 (Inventario), CAP-05 (Logística) y CAP-09 (Análisis de Red).
+• Procesos BPMN: PRC-04 (Stock) y PRC-06 (Transferencias).
+• Objetos de Información: OI-06 (Inventario Atómico), OI-08 (Manifiesto) y OI-09 (Red Logística).
+• Módulos de Software: MOD-04 (Bodega), MOD-05 (Transferencias) y MOD-07 (Edmonds-Karp).
+• Componentes Cloud AWS: TEC-03 (API Backend) y TEC-04 (Amazon RDS).
+• Brechas cerradas: B-02 (Información) y B-05 (Negocio/Aplicaciones).
+• Iniciativas que lo ejecutan: INI-02 (Transacciones ACID) e INI-05 (Modelo de Red).
+👉 ¿POR QUÉ SE ALINEAN?:
+"Resuelve dos temas logísticos: el descontrol de perchas en bodega mediante exclusión física atómica 1:1 en BD (INI-02 / RN-06) y las transferencias a ciegas mediante el algoritmo de Edmonds-Karp (INI-05 / MOD-07), que valida la capacidad vial antes de cada despacho (RN-05)."
+
+------------------------------------------------------------
+🔴 P-04: Alta sobrecarga operativa manual y lentitud
+• Hallazgos AS-IS: H-01 (procesos manuales) y H-03 (ofimática aislada).
+• Objetivo que lo resuelve: OBJ-04 (Minimizar carga manual y agilizar triaje).
+• Principios: PA-03 (Captura en el Origen) y PA-05 (Integración de Procesos).
+• Requisitos: RA-04 (Captura digital en origen por interfaces web).
+• Reglas de Negocio: RN-01 (QR inmediato en recepción) y RN-02 (Diagnóstico guiado).
+• Capacidades TO-BE: CAP-01 (Recepción), CAP-02 (Evaluación) y CAP-08 (Donantes).
+• Procesos BPMN: PRC-02 (Recepción) y PRC-03 (Evaluación Técnica).
+• Objetos de Información: OI-02 (Lote), OI-03 (Dispositivo QR) y OI-04 (Evaluación).
+• Módulos de Software: Portal Web SPA, MOD-02 (Recepción) y MOD-03 (Evaluación).
+• Componentes Cloud AWS: TEC-01 (Amazon S3 SPA) y TEC-03 (Backend en EC2).
+• Brechas cerradas: B-01 (Negocio) y B-04 (Aplicaciones).
+• Iniciativas que lo ejecutan: INI-01 (Proceso BPMN) e INI-04 (Portal Web SPA).
+👉 ¿POR QUÉ SE ALINEAN?:
+"Suprime el papeleo físico permitiendo que el operador registre y etiquete el equipo con QR en segundos desde el navegador web (INI-04), avanzando automáticamente el caso en el flujo BPMN (INI-01) hacia el taller técnico."
+
+------------------------------------------------------------
+🔴 P-05: Dificultad para ubicar evidencias diagnósticas y auditar
+• Hallazgos AS-IS: H-04 (dependencia de celulares personales y sin respaldos).
+• Objetivo que lo resuelve: OBJ-05 (Centralizar y resguardar evidencias digitales).
+• Principios: PA-04 (Evidencia Vinculada), PA-06 (Protección) y PA-07 (Mínimo Privilegio).
+• Requisitos: RA-05 (Adjuntar evidencia) y RA-07 (Control de acceso por rol).
+• Reglas de Negocio: RN-03 (Evidencia obligatoria) y RN-07 (URLs firmadas temporales).
+• Capacidades TO-BE: CAP-04 (Evidencias), CAP-07 (Cierre) y CAP-10 (Gobierno IAM).
+• Procesos BPMN: PRC-05 (Gestión de Evidencias) y PRC-06 (Transferencias).
+• Objetos de Información: OI-01 (Actor/Rol) y OI-07 (Evidencia con hash SHA-256).
+• Módulos de Software: MOD-01 (Seguridad RBAC) y MOD-06 (Servicio Evidencias S3).
+• Componentes Cloud AWS: TEC-05 (Amazon S3 Privado), TEC-06 (IAM) y TEC-07 (CloudWatch).
+• Brechas cerradas: B-03 (Información) y B-06 (Tecnología Cloud).
+• Iniciativas que lo ejecutan: INI-03 (Evidencias Digitales) e INI-06 (Infraestructura AWS).
+👉 ¿POR QUÉ SE ALINEAN?:
+"Evita que las fotografías y actas se queden en los teléfonos de los operadores. Exige indexar el archivo con hash SHA-256 a la ficha QR (INI-03) y lo custodia en un bucket privado de Amazon S3 con enlaces temporales y roles IAM de mínimo privilegio (INI-06 / RN-07)."
+
+------------------------------------------------------------
+🔴 P-06: Imposibilidad de generar KPIs en tiempo real
+• Hallazgos AS-IS: H-03 (sin visibilidad ejecutiva ni métricas de desempeño).
+• Objetivo que lo resuelve: OBJ-06 (Proveer indicadores ejecutivos en tiempo real).
+• Principios: PA-01 (Dato Confiable) y PA-05 (Integración de Procesos).
+• Requisitos: RA-06 (Agregación automática de métricas e indicadores).
+• Reglas de Negocio: RN-04 (Restricción ética) y RN-08 (Cierre formal validado).
+• Capacidades TO-BE: CAP-06 (Monitoreo y Analítica) y CAP-09 (Análisis de Red).
+• Procesos BPMN: PRC-01 (Gobernanza) y PRC-07 (Consolidación de Métricas).
+• Objetos de Información: OI-05 (Historial), OI-09 (Red) y OI-10 (Destino Final y KPIs).
+• Módulos de Software: MOD-07 (Motor Edmonds-Karp) y MOD-08 (Trazabilidad y KPIs).
+• Componentes Cloud AWS: TEC-03 (API Backend), TEC-04 (RDS) y TEC-07 (CloudWatch).
+• Brechas cerradas: B-03 (Información), B-04 (Aplicaciones) y B-05 (Logística).
+• Iniciativas que lo ejecutan: INI-03 (KPIs automáticos), INI-04 (Web) e INI-05 (Red).
+👉 ¿POR QUÉ SE ALINEAN?:
+"Las autoridades universitarias no arman reportes manuales en Excel. La plataforma computariza en tiempo real las toneladas captadas y tasas de circularidad (INI-03/INI-04) junto con los cuellos de botella calculados por el motor de red logística (INI-05)."
+
+============================================================
+🔹 3. GLOSARIO DE LAS 6 INICIATIVAS (INI-)
+============================================================
+• INI-01: Estandarización y formalización del proceso circular en BPMN 2.0.
+• INI-02: Unificación del modelo de datos relacional (3FN) con transacciones ACID.
+• INI-03: Protocolo de evidencias digitales con hash SHA-256 y cálculo automático de KPIs.
+• INI-04: Desarrollo modular de la plataforma web EcoRAEE Cloud (Portal SPA).
+• INI-05: Grafo de red logística y algoritmo Edmonds-Karp (Matemáticas Discretas).
+• INI-06: Despliegue de infraestructura cloud segura en AWS (VPC, RDS, S3, IAM, CloudWatch).
+
+============================================================
+🔹 4. GLOSARIO DE LAS 8 REGLAS DE NEGOCIO (RN-)
+============================================================
+• RN-01: Generar código QR único e iniciar historial inmutable en estado REGISTRADO.
+• RN-02: Diagnóstico técnico ejecutado exclusivamente por usuarios con rol técnico.
+• RN-03: Transferencia no se autoriza si falta origen, destino, chofer o acta adjunta.
+• RN-04: Restricción ética: prohibido donar equipos no recuperables (chatarra) a comunidades o beneficiarios sociales.
+• RN-05: El flujo transportado nunca puede exceder la capacidad disponible de la ruta f(u,v) <= c(u,v).
+• RN-06: Exclusión física atómica 1:1 en bodega (un equipo solo puede estar en una percha a la vez).
+• RN-07: Evidencias protegidas en Amazon S3; descarga solo con enlaces firmados temporales por rol.
+• RN-08: Trazabilidad cerrada únicamente cuando existe receptor confirmado, certificado y fecha validada.
